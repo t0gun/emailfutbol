@@ -1,9 +1,10 @@
 package config
 
 import (
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"os"
 	"path/filepath"
-	"reflect"
 	"testing"
 )
 
@@ -40,6 +41,8 @@ timezone = "Europe/London"
 )
 
 func TestLoadConfig(t *testing.T) {
+	assert := assert.New(t)
+	require := require.New(t)
 	tests := map[string]struct {
 		data        string
 		want        *Config
@@ -63,18 +66,10 @@ func TestLoadConfig(t *testing.T) {
 			got, err := LoadConfig(tempfile)
 
 			if tc.expectError {
-				if err == nil {
-					t.Fatalf("expected an error but got nil")
-				}
+				require.NotNil(err)
 			} else {
-				if err != nil {
-					t.Fatalf("did not expect error, got: %v", err)
-				}
-
-				if !reflect.DeepEqual(*got, *tc.want) {
-					t.Fatalf("got %v want %v", got, tc.want)
-				}
-
+				require.Nil(err)
+				assert.Equal(*got, *tc.want)
 			}
 
 		})
