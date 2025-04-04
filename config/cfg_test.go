@@ -59,7 +59,7 @@ func TestLoadConfig(t *testing.T) {
 
 			if tc.data != "" {
 				if err := os.WriteFile(tempfile, []byte(tc.data), 0644); err != nil {
-					t.Fatalf("cannot write to file: %v", err)
+					require.Nil(err)
 				}
 			}
 
