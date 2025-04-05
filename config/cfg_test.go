@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+	"time"
 )
 
 var (
@@ -24,7 +25,7 @@ timezone = "Europe/London"
 `
 	invalidConfig = "invalid config"
 
-	want = &Config{
+	config = &Config{
 		Api: Apifutbol{
 			Apikey:   "12345",
 			Teams:    []int{11, 22, 33},
@@ -48,9 +49,9 @@ func TestLoadConfig(t *testing.T) {
 		want        *Config
 		expectError bool
 	}{
-		"valid config": {data: validConfig, want: want, expectError: false},
-		"No file":      {data: "", want: want, expectError: true},
-		"Invalid toml": {data: invalidConfig, want: want, expectError: true},
+		"valid config": {data: validConfig, want: config, expectError: false},
+		"No file":      {data: "", want: config, expectError: true},
+		"Invalid toml": {data: invalidConfig, want: config, expectError: true},
 	}
 
 	for name, tc := range tests {
@@ -74,4 +75,21 @@ func TestLoadConfig(t *testing.T) {
 
 		})
 	}
+}
+
+func TestGetTomorrowsDate(t *testing.T) {
+	t.Run("valid timezone", func(t *testing.T) {
+		timezone := "Europe/London"
+		loc, _ := time.LoadLocation(timezone)
+		want := time.Now().In(loc).AddDate(0, 0, 1).Format("2006-01-02")
+		got, _ := GetTomorrowsDate(timezone)
+		assert.Equal(t, want, got)
+		t.Parallel()
+	})
+
+	t.Run("invalid timezone", func(t *testing.T) {
+		_, err := GetTomorrowsDate("incorrect/timezone")
+		require.NotNil(t, err)
+		t.Parallel()
+	})
 }
