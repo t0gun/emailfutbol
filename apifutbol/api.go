@@ -1,6 +1,7 @@
 package apifutbol
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -31,4 +32,18 @@ func GetFixtures(timezone, apikey, date string) (*http.Response, error) {
 	}
 
 	return resp, nil
+}
+
+func DecodeResponse(resp *http.Response) (*FixturesResponse, error) {
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var fixturesresp *FixturesResponse
+	if err = json.Unmarshal(body, &fixturesresp); err != nil {
+		return nil, err
+	}
+	return fixturesresp, nil
 }
