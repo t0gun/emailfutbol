@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/BurntSushi/toml"
 	"os"
+	"time"
 )
 
 type (
@@ -37,4 +38,15 @@ func LoadConfig(filename string) (*Config, error) {
 	}
 
 	return &cfg, nil
+}
+
+func GetTomorrowsDate(timezone string) (string, error) {
+	loc, err := time.LoadLocation(timezone)
+	if err != nil {
+		return "", err
+	}
+	now := time.Now().In(loc)
+	tomorrow := now.AddDate(0, 0, 1)
+	date := tomorrow.Format("2006-01-02")
+	return date, nil
 }
