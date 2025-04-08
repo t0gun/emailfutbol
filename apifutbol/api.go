@@ -100,8 +100,16 @@ type (
 	}
 )
 
-func GetFixtures(client *http.Client, timezone, apikey, date, baseUrl string) ([]*FixturesResponse, error) {
-	url := buildFixturesUrl(baseUrl, timezone, date)
+type APIClient struct {
+	Client   *http.Client
+	Timezone string
+	Apikey   string
+	Date     string
+	BaseUrl  string
+}
+
+func (api *APIClient) GetFixtures() ([]*FixturesResponse, error) {
+	url := api.buildFixturesUrl()
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -109,9 +117,13 @@ func GetFixtures(client *http.Client, timezone, apikey, date, baseUrl string) ([
 	}
 
 	req.Header.Add("x-rapidapi-host", "v3.football.api-sports.io")
-	req.Header.Add("x-rapidapi-key", apikey)
+	req.Header.Add("x-rapidapi-key", api.Apikey)
 	req.Header.Add("Accept", "application/json")
-	resp, err := client.Do(req)
+	resp, err := api.Client.Do(req)
+
+	if err != nil {
+		return nil, err
+	}
 
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
@@ -131,9 +143,19 @@ func GetFixtures(client *http.Client, timezone, apikey, date, baseUrl string) ([
 
 }
 
-func buildFixturesUrl(baseUrl, timezone, date string) string {
+func (api *APIClient) buildFixturesUrl() string {
 	params := url.Values{}
-	params.Add("date", date)
-	params.Add("timezone", timezone)
-	return fmt.Sprintf("%s/fixtures?%s", baseUrl, params.Encode())
+	params.Add("date", api.Date)
+	params.Add("timezone", api.Timezone)
+	return fmt.Sprintf("%s/fixtures?%s", api.BaseUrl, params.Encode())
+}
+
+func NewAPIClient(baseURL, apikey, date, timezone string, client *http.Client) *APIClient {
+	return &APIClient{
+		BaseUrl:  baseURL,
+		Apikey:   apikey,
+		Client:   client,
+		Timezone: timezone,
+		Date:     date,
+	}
 }
