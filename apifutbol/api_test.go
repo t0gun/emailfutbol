@@ -64,3 +64,5 @@ func FuzzAPIClient_GetFixtures(f *testing.F) {
 		_, _ = api.GetFixtures()
 	})
 }
+
+// Test marshal error in json
