@@ -60,9 +60,7 @@ func FuzzAPIClient_GetFixtures(f *testing.F) {
 	client := &http.Client{}
 
 	f.Fuzz(func(t *testing.T, url string) {
-		api := NewAPIClient(url, "key", "today", "UTC", client)
+		api := NewAPIClient(url, "key", "today", "Europe/London", client)
 		_, _ = api.GetFixtures()
 	})
 }
-
-// Test marshal error in json

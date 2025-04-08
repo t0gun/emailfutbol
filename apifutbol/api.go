@@ -109,9 +109,9 @@ type APIClient struct {
 }
 
 func (api *APIClient) GetFixtures() ([]*FixturesResponse, error) {
-	url := api.buildFixturesUrl()
+	fullUrl := api.buildFixturesUrl()
 
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -127,6 +127,7 @@ func (api *APIClient) GetFixtures() ([]*FixturesResponse, error) {
 
 	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
+		defer resp.Body.Close()
 		return nil, fmt.Errorf("unexpected status %d: %s", resp.StatusCode, string(body))
 	}
 
