@@ -64,3 +64,15 @@ func FuzzAPIClient_GetFixtures(f *testing.F) {
 		_, _ = api.GetFixtures()
 	})
 }
+
+func TestAPIClient_GetFixtures_BadJSON(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{not-json`))
+	}))
+	ts.Close()
+	client := NewAPIClient(ts.URL, "testkey", "today", "Europe/London", ts.Client())
+	_, err := client.GetFixtures()
+	require.Error(t, err)
+
+}
