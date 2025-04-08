@@ -19,6 +19,7 @@ password = "12345"
 
 [api]
 apikey = "12345"
+apiurl = "https://v3.football.api-sports.io/"
 leagues = [11, 22, 33]
 teams = [11, 22, 33]
 timezone = "Europe/London"
@@ -28,6 +29,7 @@ timezone = "Europe/London"
 	config = &Config{
 		Api: Apifutbol{
 			Apikey:   "12345",
+			Apiurl:   "https://v3.football.api-sports.io/",
 			Teams:    []int{11, 22, 33},
 			Leagues:  []int{11, 22, 33},
 			Timezone: "Europe/London",

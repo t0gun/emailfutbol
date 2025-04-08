@@ -21,6 +21,7 @@ type (
 
 	Apifutbol struct {
 		Apikey   string `toml:"apikey"`
+		Apiurl   string `toml:"apiurl"`
 		Leagues  []int  `toml:"leagues"`
 		Teams    []int  `toml:"teams"`
 		Timezone string `toml:"timezone"`
