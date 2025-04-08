@@ -74,5 +74,4 @@ func TestAPIClient_GetFixtures_BadJSON(t *testing.T) {
 	client := NewAPIClient(ts.URL, "testkey", "today", "Europe/London", ts.Client())
 	_, err := client.GetFixtures()
 	require.Error(t, err)
-
 }
