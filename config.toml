@@ -1,0 +1,13 @@
+[smtp]
+server = "smtp.mail.me.com"
+port = 587
+email = ""
+password = ""
+
+
+[api]
+apikey = ""
+apiurl = "https://v3.football.api-sports.io/"
+leagues = [1, 2,]
+teams = [529, 541, 530, 531, 50, 42, 85, 157]
+timezone = "Europe/london"
