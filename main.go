@@ -45,21 +45,25 @@ func (m *MatchCollector) Results() []string {
 }
 
 func selectFixtureByTeams(cfg *config.Config, fixtures []*apifutbol.FixturesResponse, mc *MatchCollector) {
+	teams := make(map[int]struct{})
 	for _, team := range cfg.Api.Teams {
-		for _, fixture := range fixtures {
-			if team == fixture.Teams.Home.Id || team == fixture.Teams.Away.Id {
-				mc.addMatches(fixture)
-			}
+		teams[team] = struct{}{}
+	}
+	for _, fixture := range fixtures {
+		if _, ok := teams[fixture.Teams.Home.Id]; ok {
+			mc.addMatches(fixture)
 		}
+		if _, ok := teams[fixture.Teams.Away.Id]; ok {
+			mc.addMatches(fixture)
+		}
+
 	}
 }
 
 func selectFixtureByLeagues(cfg *config.Config, fixtures []*apifutbol.FixturesResponse, mc *MatchCollector) {
-	var Empty struct{}
 	leagues := make(map[int]struct{})
-
 	for _, leagueID := range cfg.Api.Leagues {
-		leagues[leagueID] = Empty
+		leagues[leagueID] = struct{}{}
 	}
 	for _, fixture := range fixtures {
 		if _, ok := leagues[fixture.League.Id]; ok {
