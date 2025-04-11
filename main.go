@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/ogundiyantobiloba/emailfutbal/apifutbol"
 	"github.com/ogundiyantobiloba/emailfutbal/config"
@@ -87,7 +88,9 @@ func sendMail(mc *MatchCollector, cfg *config.Config) error {
 }
 
 func main() {
-	cfg, err := config.LoadConfig("config.toml")
+	configPath := flag.String("config", "config.toml", "Path to the config file")
+	flag.Parse()
+	cfg, err := config.LoadConfig(*configPath)
 	if err != nil {
 		log.Fatalf("Error Loading config:%s", err)
 	}
