@@ -57,10 +57,6 @@ func (m *Mail) SendEmail() error {
 		return fmt.Errorf("writing message failed: %s", err)
 	}
 
-	if err = m.client.Quit(); err != nil {
-		return fmt.Errorf("QUIT failed: %w", err)
-	}
-
 	return nil
 }
 
@@ -69,7 +65,7 @@ func (m *Mail) dialTLS() error {
 		ServerName: m.Server,
 	}
 	address := fmt.Sprintf("%s:%d", m.Server, m.Port)
-	client, err := smtp.DialTLS(address, tlsConfig)
+	client, err := smtp.DialStartTLS(address, tlsConfig)
 	if err != nil {
 		return err
 	}
