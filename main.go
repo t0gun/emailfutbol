@@ -104,6 +104,11 @@ func main() {
 	api := apifutbol.NewAPIClient(cfg.Api.Apiurl, cfg.Api.Apikey, date, cfg.Api.Timezone, client)
 	mc := newMatchCollector()
 	fixtures, err := api.GetFixtures()
+
+	if err != nil {
+		log.Fatalf("cant get fixtures: %d", err)
+	}
+
 	selectFixtureByTeams(cfg, fixtures, mc)
 	selectFixtureByLeagues(cfg, fixtures, mc)
 

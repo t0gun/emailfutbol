@@ -43,7 +43,7 @@ The tool is designed for **local cron-based usage**, and built around my own wor
 -  [Optimizing Slice Lookups With Go Maps](https://aramide.dev/posts/optimizing-slice-lookups-with-go-maps-tobiloba-aramide-ogundiyan/)  
   A case study on improving nested loop performance using map-based lookups.
 
--  *(Coming soon)* Mocking HTTP Servers for Go API Clients  
+-  *(Coming soon)* Testing Go HTTP Clients: Mock Servers, Edge Cases and Fuzzing
   A walkthrough of how I tested API interactions in this project using `httptest`.
 
 ---
