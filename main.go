@@ -119,7 +119,7 @@ func main() {
 
 	if err = sendMail(mc, cfg); err != nil {
 		log.Fatalf("Failed to send email: %v", err)
-	} else {
-		fmt.Println("Email sent successfully")
 	}
+	fmt.Println("Email sent successfully")
+
 }

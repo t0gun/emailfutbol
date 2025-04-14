@@ -60,6 +60,7 @@ func (m *Mail) SendEmail() error {
 	return nil
 }
 
+
 func (m *Mail) dialTLS() error {
 	tlsConfig := &tls.Config{
 		ServerName: m.Server,
