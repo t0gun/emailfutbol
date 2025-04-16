@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/ogundiyantobiloba/emailfutbal/apifutbol"
-	"github.com/ogundiyantobiloba/emailfutbal/config"
-	"github.com/ogundiyantobiloba/emailfutbal/mailer"
+	"github.com/t0gun/emailfutbal/apifutbol"
+	"github.com/t0gun/emailfutbal/config"
+	"github.com/t0gun/emailfutbal/mailer"
 	"log"
 	"net/http"
 	"strings"

@@ -1,4 +1,4 @@
-module github.com/ogundiyantobiloba/emailfutbal
+module github.com/t0gun/emailfutbal
 
 go 1.24.2
 
