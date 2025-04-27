@@ -1,6 +1,6 @@
 # emailfutbol
 
-A small CLI tool that emails only the football fixtures I care about — no apps, no spam, just a filtered matchday digest in my inbox every morning.
+A small CLI tool that emails only the football fixtures I care about
 
 ## What It Does
 
