@@ -1,5 +1,3 @@
-# emailfutbol
-
 A small CLI tool that emails only the football fixtures I care about
 
 ## What It Does
@@ -9,8 +7,7 @@ A small CLI tool that emails only the football fixtures I care about
 - Emails the result using a basic SMTP setup
 
 ---
-
-## Why I Built It
+#### Why I Built It
 
 I don’t check sports apps or news often, but I check my email every morning.  
 So I built this to send only the matches I actually care about, for the next day.
@@ -19,7 +16,7 @@ The tool is designed for **local cron-based usage**, and built around my own wor
 
 ---
 
-## Key Design Notes
+#### Key Design Notes
 
 - **Personal Use Case**  
   Currently built to send **only the next day’s fixtures** for a defined list of teams/leagues.
