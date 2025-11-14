@@ -35,9 +35,6 @@ The tool is designed for **local cron-based usage**, and built around my own wor
 
 ---
 
-
-
-## Example Usage
-
+you can test run using
 ```bash
 go run main.go -config=config.toml
