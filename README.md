@@ -33,8 +33,6 @@ The tool is designed for **local cron-based usage**, and built around my own wor
     - Easy to swap components or add CLI flags
     - Config-driven via `.toml`
 
----
-
 you can test run using
 ```bash
 go run main.go -config=config.toml
