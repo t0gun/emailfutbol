@@ -6,7 +6,6 @@ A small CLI tool that emails only the football fixtures I care about
 - Filters by league or team IDs
 - Emails the result using a basic SMTP setup
 
----
 #### Why I Built It
 
 I don’t check sports apps or news often, but I check my email every morning.  
@@ -14,7 +13,6 @@ So I built this to send only the matches I actually care about, for the next day
 
 The tool is designed for **local cron-based usage**, and built around my own workflow — but the code is modular enough to extend.
 
----
 
 #### Key Design Notes
 
